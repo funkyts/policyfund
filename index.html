@@ -655,6 +655,7 @@
         let totalScore = 0;
 
         function startTest() {
+            gtag('event', 'test_started');
             document.getElementById('welcome-page').style.display = 'none';
             document.getElementById('question-page').style.display = 'block';
             showQuestion();
@@ -686,6 +687,7 @@
 
         function selectOption(optionIndex, button) {
             // 이전 선택 해제
+            gtag('event', 'question_answered');
             document.querySelectorAll('.option-button').forEach(btn => {
                 btn.classList.remove('selected');
             });
@@ -698,6 +700,7 @@
                 optionIndex: optionIndex,
                 score: questions[currentQuestion].options[optionIndex].score
             };
+
             
             // 다음 버튼 활성화
             document.getElementById('next-button').classList.add('active');
@@ -722,6 +725,8 @@
         }
 
         function showResult() {
+
+            gtag('event', 'test_completed');
             document.getElementById('question-page').style.display = 'none';
             document.getElementById('result-page').style.display = 'block';
             
@@ -772,12 +777,14 @@
         }
 
         function goToKakao() {
+            gtag('event', 'kakao_click');
             document.getElementById('result-page').style.display = 'none';
             document.getElementById('kakao-page').style.display = 'block';
         }
 
         function openKakaoChannel() {
             // 실제 카카오톡 채널 URL로 변경
+            gtag('event', 'final_conversion');
             window.open('https://pf.kakao.com/_WDFxmn/chat', '_blank');
         }
 
